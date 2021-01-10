@@ -8,6 +8,13 @@ def index(request):
   if request.method == 'POST':
     item = request.POST.get('newItem') # Get the item entered by user
     request.session.modified = True # To allow session variables to be modified
-    items = request.session.get('items',' ') #Get the session variable. Set it to '' is not available
-    request.session['items'] = items+"__!$__"+item #TODO: Must make use of Lists instead of String
-  return render(request, 'todo/index.html', {'kindOfDay':d, 'newListItems': request.session.get('items', '').split("__!$__")[1:]}) #TODO: Remove after implementing with Lists.
+    if not 'items' in request.session or not request.session['items']: # Check if cookie is already present
+      request.session['items'] = list()
+      items = request.session['items']
+      items.append(item)
+      request.session['items'] = items
+    else:
+      items = request.session['items']
+      items.append(item)
+      request.session['items'] = items
+  return render(request, 'todo/index.html', {'kindOfDay':d, 'newListItems': request.session.get('items',[])}) 
