@@ -10,6 +10,4 @@ def index(request):
     request.session.modified = True # To allow session variables to be modified
     items = request.session.get('items',' ') #Get the session variable. Set it to '' is not available
     request.session['items'] = items+"__!$__"+item #TODO: Must make use of Lists instead of String
-    return render(request, 'todo/index.html', {'kindOfDay':d, 'newListItems': request.session.get('items', '').split("__!$__")[1:]}) #TODO: Remove after implementing with Lists.
-  else: #TODO: Remove after implementing with Lists.
-    return render(request, 'todo/index.html', {'kindOfDay':d, 'newListItems': request.session.get('items', '')}) #TODO: Remove after implementing with Lists.
+  return render(request, 'todo/index.html', {'kindOfDay':d, 'newListItems': request.session.get('items', '').split("__!$__")[1:]}) #TODO: Remove after implementing with Lists.
