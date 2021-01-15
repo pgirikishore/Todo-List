@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>Day of the week </title>
+<title>To Do List </title>
 </head>
 <body>
 <div class="box" id="heading">
@@ -15,6 +15,7 @@
   <div class="item">
     <input type="checkbox" \>
     <p>{{ i }}</p>
+    <a href="{% url 'todo:delete_item' i %}">X</a>
   </div>
 {% endfor %}
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from datetime import date
 
 # Create your views here.
@@ -18,3 +18,14 @@ def index(request):
       items.append(item)
       request.session['items'] = items
   return render(request, 'todo/index.html', {'kindOfDay':d, 'newListItems': request.session.get('items',[])}) 
+
+def delete_item(request, item_id):
+  today = date.today()
+  d = today.strftime("%A,  %B %d") # DayofWeek, Month Day
+  if request.method == "GET":
+    print("Inside delete_item")
+    items = request.session['items']
+    items.remove(item_id)
+    request.session['items'] = items
+  # return render(request, 'todo/index.html', {'kindOfDay': d, 'newListItems': request.session.get('items',[])})
+  return redirect("https://todo.pgirikishore.repl.co/")
