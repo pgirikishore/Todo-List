@@ -1,29 +1,66 @@
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'todo/styles.css' %}">
+<!DOCTYPE html>
 
 <html>
 <head>
-<title>To Do List </title>
+  <title>To Do List </title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'todo/styles.css' %}">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  
 </head>
 <body>
-<div class="box" id="heading">
+
+<div class="utils-box" id="heading">
 <h1>{{kindOfDay}}!</h1>
 </div>
 
-<div class="box">
-{% for i in newListItems %}
-  <div class="item">
+<!-- <div class="utils-box">
+{% for i in newTileItems %}
+  <div class="utils-item">
     <input type="checkbox" \>
     <p>{{ i }}</p>
-    <a href="{% url 'todo:delete_item' i %}">X</a>
+    <a href="{% url 'todo:delete_tile' i %}">X</a>
   </div>
-{% endfor %}
+{% endfor %} -->
 
-<form class= "item" action="" method="post">
+<div class="utils-box">
+<form class= "utils-item" action="" method="post">
 {% csrf_token %}
-<input type="text" name="newItem" placeholder="New Item">
+<input type="text" name="newTile" placeholder="Add new tile title.">
 <button type="submit" name="button">+</button>
 </form>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3">
+  {% for i in newTileItems %}
+    <div class="col mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+        <div class="utils-box" id="heading">
+          <h1>{{ i }} <span><a href="{% url 'todo:delete_tile' i %}">X</a></span> </h1>
+        </div>
+        <div class="utils-box">
+          {% load todo_extras %}
+          {% for items in newItems|key:i %}
+            <div class="utils-item">
+              <input type="checkbox" \>
+              <p>{{ items }}</p>
+              <a href="{% url 'todo:delete_item' i items %}">X</a>
+            </div>
+          {% endfor %}
+          <form class= "utils-item" action={% url 'todo:items' i %} method="post">
+          {% csrf_token %}
+            <div class="utils-tile">
+              <input type="text" name="newItem" placeholder="Add new item here.">
+              <button type="submit" name="button">+</button>
+            </div>
+          </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
 </div>
 
 </body>

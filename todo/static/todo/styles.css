@@ -2,7 +2,12 @@ html {
   background-color: #E4E9FD;
   background-image: -webkit-linear-gradient(65deg, #A683E3 50%, #E4E9FD 50%);
   min-height: 1000px;
-  font-family: 'helvetica neue';
+  font-family: 'helvetica neue' !important;
+}
+
+body{
+  background-color: transparent !important; 
+  font-family: 'helvetica neue' !important;
 }
 
 h1 {
@@ -10,7 +15,7 @@ h1 {
   padding: 10px;
 }
 
-.box {
+.utils-box {
   max-width: 400px;
   margin: 50px auto;
   background: white;
@@ -23,14 +28,22 @@ h1 {
   text-align: center;
 }
 
-.item {
+.utils-item {
+  position: relative;
   min-height: 70px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid #F1F1F1;
 }
 
-.item:last-child {
+.utils-tile {
+  position: relative;
+  min-height: 70px;
+  align-items: center;
+  border-bottom: 1px solid #F1F1F1;
+}
+
+.utils-item:last-child {
   border-bottom: 0;
 }
 
@@ -44,20 +57,22 @@ input[type="checkbox"] {
 }
 
 a {
-  display: inline-block;
-  text-align: right;
-  width: 100%;
-  text-decoration: none;
-  margin: 20px;
-  margin-right: 30px;
+  text-decoration: none !important;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  color: black !important;
+  font-size: 120%;
 }
+
 
 p {
   margin: 0;
+  margin-bottom: 0 !important;
   padding: 20px;
   font-size: 20px;
-  font-weight: 200;
-  color: #00204a;
+  font-weight: 200 !important;
+  color: #00204a !important;
 }
 
 form {
@@ -68,13 +83,14 @@ form {
 button {
   min-height: 50px;
   width: 50px;
-  border-radius: 50%;
+  border-radius: 50% !important;
   border-color: transparent;
   background-color: #A683E3;
   color: #fff;
-  font-size: 30px;
+  font-size: 30px !important;
   padding-bottom: 6px;
   border-width: 0;
+  font-family: 'helvetica neue';
 }
 
 input[type="text"] {
@@ -85,7 +101,6 @@ input[type="text"] {
   background: transparent;
   font-size: 20px;
   font-weight: 200;
-  width: 313px;
 }
 
 input[type="text"]:focus {
@@ -102,4 +117,11 @@ footer {
   color: white;
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
+}
+
+span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.5em;
 }
